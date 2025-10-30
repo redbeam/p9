@@ -27,11 +27,11 @@ func (cmd *readCmd) Desc() string {
 func (cmd *readCmd) Run(options GlobalOptions, args []string) error {
 	fset := flag.NewFlagSet(cmd.Name(), flag.ExitOnError)
 	fset.Usage = func() {
-		fmt.Fprintf(fset.Output(), "%v reads the raw contents of a file and prints them to stdout.\n", cmd.Name())
-		fmt.Fprintf(fset.Output(), "\n")
-		fmt.Fprintf(fset.Output(), "Usage: %v <path...>\n", cmd.Name())
-		fmt.Fprintf(fset.Output(), "\n")
-		fmt.Fprintf(fset.Output(), "Options:\n")
+		_, _ = fmt.Fprintf(fset.Output(), "%v reads the raw contents of a file and prints them to stdout.\n", cmd.Name())
+		_, _ = fmt.Fprintf(fset.Output(), "\n")
+		_, _ = fmt.Fprintf(fset.Output(), "Usage: %v <path...>\n", cmd.Name())
+		_, _ = fmt.Fprintf(fset.Output(), "\n")
+		_, _ = fmt.Fprintf(fset.Output(), "Options:\n")
 		fset.PrintDefaults()
 	}
 	fset.BoolVar(&cmd.tar, "tar", false, "Output files as tar.")
@@ -42,8 +42,8 @@ func (cmd *readCmd) Run(options GlobalOptions, args []string) error {
 
 	args = fset.Args()
 	if len(args) == 0 {
-		fmt.Fprintf(fset.Output(), "Error: Need at least one path.\n")
-		fmt.Fprintf(fset.Output(), "\n")
+		_, _ = fmt.Fprintf(fset.Output(), "Error: Need at least one path.\n")
+		_, _ = fmt.Fprintf(fset.Output(), "\n")
 		return flag.ErrHelp
 	}
 

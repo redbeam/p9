@@ -23,11 +23,11 @@ func (cmd *writeCmd) Desc() string {
 func (cmd *writeCmd) Run(options GlobalOptions, args []string) error {
 	fset := flag.NewFlagSet(cmd.Name(), flag.ExitOnError)
 	fset.Usage = func() {
-		fmt.Fprintf(fset.Output(), "%v copies the entirety of stdin into a file.\n", cmd.Name())
-		fmt.Fprintf(fset.Output(), "\n")
-		fmt.Fprintf(fset.Output(), "Usage: %v [options] <path>\n", cmd.Name())
-		fmt.Fprintf(fset.Output(), "\n")
-		fmt.Fprintf(fset.Output(), "Options:\n")
+		_, _ = fmt.Fprintf(fset.Output(), "%v copies the entirety of stdin into a file.\n", cmd.Name())
+		_, _ = fmt.Fprintf(fset.Output(), "\n")
+		_, _ = fmt.Fprintf(fset.Output(), "Usage: %v [options] <path>\n", cmd.Name())
+		_, _ = fmt.Fprintf(fset.Output(), "\n")
+		_, _ = fmt.Fprintf(fset.Output(), "Options:\n")
 		fset.PrintDefaults()
 	}
 	app := fset.Bool("a", false, "Append to the file instead of overwriting it.")
@@ -43,8 +43,8 @@ func (cmd *writeCmd) Run(options GlobalOptions, args []string) error {
 
 	args = fset.Args()
 	if len(args) != 1 {
-		fmt.Fprintf(fset.Output(), "Error: Only one file can be specified.\n")
-		fmt.Fprintf(fset.Output(), "\n")
+		_, _ = fmt.Fprintf(fset.Output(), "Error: Only one file can be specified.\n")
+		_, _ = fmt.Fprintf(fset.Output(), "\n")
 		return flag.ErrHelp
 	}
 

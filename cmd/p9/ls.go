@@ -27,11 +27,11 @@ func (cmd *lsCmd) Desc() string {
 func (cmd *lsCmd) Run(options GlobalOptions, args []string) error {
 	fset := flag.NewFlagSet(cmd.Name(), flag.ExitOnError)
 	fset.Usage = func() {
-		fmt.Fprintf(fset.Output(), "%v lists the files in a directory.\n", cmd.Name())
-		fmt.Fprintf(fset.Output(), "\n")
-		fmt.Fprintf(fset.Output(), "Usage: %v [-l] [path...]\n", cmd.Name())
-		fmt.Fprintf(fset.Output(), "\n")
-		fmt.Fprintf(fset.Output(), "Options:\n")
+		_, _ = fmt.Fprintf(fset.Output(), "%v lists the files in a directory.\n", cmd.Name())
+		_, _ = fmt.Fprintf(fset.Output(), "\n")
+		_, _ = fmt.Fprintf(fset.Output(), "Usage: %v [-l] [path...]\n", cmd.Name())
+		_, _ = fmt.Fprintf(fset.Output(), "\n")
+		_, _ = fmt.Fprintf(fset.Output(), "Options:\n")
 		fset.PrintDefaults()
 	}
 	fset.BoolVar(&cmd.showDetails, "l", false, "Show details.")
@@ -105,7 +105,7 @@ func (cmd *lsCmd) printEntries(entries []p9.DirEntry) {
 				yd = "2006"
 			}
 
-			fmt.Fprintf(
+			_, _ = fmt.Fprintf(
 				w,
 				"%v\t%v\t%v\t%v\t%v\t",
 				entry.FileMode,
@@ -115,7 +115,7 @@ func (cmd *lsCmd) printEntries(entries []p9.DirEntry) {
 				entry.MTime.Format("Jan 02 "+yd),
 			)
 		}
-		fmt.Fprintf(w, "%v\n", entry.EntryName)
+		_, _ = fmt.Fprintf(w, "%v\n", entry.EntryName)
 	}
 }
 

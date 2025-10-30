@@ -25,11 +25,11 @@ func (cmd *exportCmd) Desc() string {
 func (cmd *exportCmd) Run(options GlobalOptions, args []string) error {
 	fset := flag.NewFlagSet(cmd.Name(), flag.ExitOnError)
 	fset.Usage = func() {
-		fmt.Fprintf(fset.Output(), "%v serves a directory over 9P.\n", cmd.Name())
-		fmt.Fprintf(fset.Output(), "\n")
-		fmt.Fprintf(fset.Output(), "Usage: %v <path>\n", cmd.Name())
-		fmt.Fprintf(fset.Output(), "\n")
-		fmt.Fprintf(fset.Output(), "Options:\n")
+		_, _ = fmt.Fprintf(fset.Output(), "%v serves a directory over 9P.\n", cmd.Name())
+		_, _ = fmt.Fprintf(fset.Output(), "\n")
+		_, _ = fmt.Fprintf(fset.Output(), "Usage: %v <path>\n", cmd.Name())
+		_, _ = fmt.Fprintf(fset.Output(), "\n")
+		_, _ = fmt.Fprintf(fset.Output(), "Options:\n")
 		fset.PrintDefaults()
 	}
 	rw := fset.Bool("rw", false, "Make exported FS writable.")
@@ -40,8 +40,8 @@ func (cmd *exportCmd) Run(options GlobalOptions, args []string) error {
 
 	args = fset.Args()
 	if len(args) != 1 {
-		fmt.Fprintf(fset.Output(), "Error: Need exactly one path.\n")
-		fmt.Fprintf(fset.Output(), "\n")
+		_, _ = fmt.Fprintf(fset.Output(), "Error: Need exactly one path.\n")
+		_, _ = fmt.Fprintf(fset.Output(), "\n")
 		return flag.ErrHelp
 	}
 

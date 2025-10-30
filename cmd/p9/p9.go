@@ -56,23 +56,23 @@ func (helpCmd) Run(options GlobalOptions, args []string) (err error) {
 			return cmd.Run(options, []string{args[1], "--help"})
 		}
 
-		fmt.Fprintf(os.Stderr, "Unknown help topic: %q\n", args[1])
-		fmt.Fprintf(os.Stderr, "\n")
+		_, _ = fmt.Fprintf(os.Stderr, "Unknown help topic: %q\n", args[1])
+		_, _ = fmt.Fprintf(os.Stderr, "\n")
 		err = flag.ErrHelp
 	}
 
 	arg0 := filepath.Base(os.Args[0])
 
-	fmt.Fprintf(os.Stderr, "%v is a command-line tool for both accessing and serving 9P filesystems.\n", arg0)
-	fmt.Fprintf(os.Stderr, "\n")
-	fmt.Fprintf(os.Stderr, "Usage: %v [global options] <command> [command options]\n", arg0)
-	fmt.Fprintf(os.Stderr, "\n")
-	fmt.Fprintf(os.Stderr, "Global Options:\n")
+	_, _ = fmt.Fprintf(os.Stderr, "%v is a command-line tool for both accessing and serving 9P filesystems.\n", arg0)
+	_, _ = fmt.Fprintf(os.Stderr, "\n")
+	_, _ = fmt.Fprintf(os.Stderr, "Usage: %v [global options] <command> [command options]\n", arg0)
+	_, _ = fmt.Fprintf(os.Stderr, "\n")
+	_, _ = fmt.Fprintf(os.Stderr, "Global Options:\n")
 	flag.PrintDefaults()
-	fmt.Fprintf(os.Stderr, "\n")
-	fmt.Fprintf(os.Stderr, "Commands:\n")
+	_, _ = fmt.Fprintf(os.Stderr, "\n")
+	_, _ = fmt.Fprintf(os.Stderr, "Commands:\n")
 	for _, cmd := range commands {
-		fmt.Fprintf(os.Stderr, "\t%v\t\t%v\n", cmd.Name(), cmd.Desc())
+		_, _ = fmt.Fprintf(os.Stderr, "\t%v\t\t%v\n", cmd.Name(), cmd.Desc())
 	}
 
 	return err
@@ -133,7 +133,7 @@ type GlobalOptions struct {
 func getUsername() string {
 	u, err := user.Current()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Failed to get username: %v\n", err)
+		_, _ = fmt.Fprintf(os.Stderr, "Failed to get username: %v\n", err)
 		return ""
 	}
 
@@ -172,7 +172,7 @@ func main() {
 				os.Exit(2)
 			}
 
-			fmt.Fprintf(os.Stderr, "Error: %v\n", err)
+			_, _ = fmt.Fprintf(os.Stderr, "Error: %v\n", err)
 			os.Exit(1)
 		}
 	}
@@ -184,7 +184,7 @@ func main() {
 
 	c := GetCommand(cmd)
 	if c == nil {
-		fmt.Fprintf(os.Stderr, "No such command: %q\n", cmd)
+		_, _ = fmt.Fprintf(os.Stderr, "No such command: %q\n", cmd)
 		runCommand(GetCommand("help"))
 		os.Exit(2)
 	}
